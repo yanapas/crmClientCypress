@@ -1,3 +1,23 @@
+import MainPage from "./page_objects/main_page";
+import LoginPage from "./page_objects/login_page";
+
+const mainPage = new MainPage();
+const loginPage = new LoginPage();
+
+Cypress.Commands.add('login', (email, password) => {
+    loginPage.open();
+    loginPage.fieldEmail().type(email);
+    loginPage.fieldPassword().type(password);
+    loginPage.buttonLogin().click();
+    mainPage.isOpen();
+})
+
+Cypress.Commands.add('logout', () => {
+    mainPage.dropdownUserProfile().click();
+    mainPage.linkLogout().click();
+})
+
+
 // ***********************************************
 // This example commands.js shows you how to
 // create various custom commands and overwrite
